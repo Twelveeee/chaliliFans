@@ -1,0 +1,36 @@
+---
+import { getText } from "@/lib/i18n";
+import type { Locale, Song } from "@/types/content";
+import type { Messages } from "@/i18n/messages";
+
+interface Props {
+  locale: Locale;
+  songs: Song[];
+  messages: Messages;
+}
+
+const { locale, songs, messages } = Astro.props;
+const recentSongs = [...songs]
+  .sort((a, b) => b.releaseDate.localeCompare(a.releaseDate))
+  .slice(0, 6);
+---
+
+<section class="section shell" aria-label={messages.sections.recentSongs}>
+  <div class="section-head">
+    <h2>{messages.sections.recentSongs}</h2>
+  </div>
+
+  <div class="recent-songs-row">
+    {
+      recentSongs.map((song) => (
+        <a class="recent-song-card card" href={`/${locale}/music/${song.id}`}>
+          <img src={song.cover} alt={getText(song.title, locale)} loading="lazy" />
+          <div>
+            <h3>{getText(song.title, locale)}</h3>
+            <p>{song.releaseDate}</p>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</section>

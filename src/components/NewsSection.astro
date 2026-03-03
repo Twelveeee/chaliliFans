@@ -1,0 +1,39 @@
+---
+import { getText } from "@/lib/i18n";
+import type { Messages } from "@/i18n/messages";
+import type { Locale, NewsItem } from "@/types/content";
+
+interface Props {
+  locale: Locale;
+  news: NewsItem[];
+  messages: Messages;
+}
+
+const { locale, news, messages } = Astro.props;
+const dateLocale = locale === "zh" ? "zh-CN" : locale === "ja" ? "ja-JP" : "en-US";
+---
+
+<section id="news" class="section shell">
+  <div class="section-head">
+    <h2>{messages.sections.news}</h2>
+  </div>
+
+  <div class="news-list">
+    {
+      news.slice(0, 5).map((item) => (
+        <article class="card news-card">
+          <p class="news-date">{new Date(item.date).toLocaleDateString(dateLocale)}</p>
+          <h3>{getText(item.title, locale)}</h3>
+          <p>{getText(item.content, locale)}</p>
+          {
+            item.link ? (
+              <a href={item.link} target="_blank" rel="noopener noreferrer" class="news-link">
+                Open
+              </a>
+            ) : null
+          }
+        </article>
+      ))
+    }
+  </div>
+</section>

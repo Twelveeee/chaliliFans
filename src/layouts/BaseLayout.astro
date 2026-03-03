@@ -1,0 +1,36 @@
+---
+import "@/styles/global.css";
+import { mapHtmlLang } from "@/lib/i18n";
+import type { Locale } from "@/types/content";
+
+interface Props {
+  title: string;
+  description: string;
+  locale: Locale;
+}
+
+const { title, description, locale } = Astro.props;
+const htmlLang = mapHtmlLang(locale);
+---
+
+<!doctype html>
+<html lang={htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8V9M3RK66Q"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-8V9M3RK66Q");
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

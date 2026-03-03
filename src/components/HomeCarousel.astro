@@ -1,0 +1,138 @@
+---
+import { getText } from "@/lib/i18n";
+import type { Messages } from "@/i18n/messages";
+import type { HomeBanner, Locale } from "@/types/content";
+
+interface Props {
+  locale: Locale;
+  banners: HomeBanner[];
+  messages: Messages;
+}
+
+const { locale, banners, messages } = Astro.props;
+
+function localizeBannerLink(link: string | undefined): string | undefined {
+  if (!link) return undefined;
+  return link.replace(/^\/(zh|en|ja)(?=\/|$)/, `/${locale}`);
+}
+---
+
+<section class="home-carousel section shell" aria-label={messages.sections.hero}>
+  <div class="carousel card" data-carousel>
+    <div class="carousel-track">
+      {
+        banners.map((banner) => (
+          <article class="carousel-slide">
+            <img src={banner.image} alt={getText(banner.title, locale)} loading="eager" />
+            <div class="carousel-overlay"></div>
+            <div class="carousel-content">
+              <h1>{getText(banner.title, locale)}</h1>
+              <p>{getText(banner.subtitle, locale)}</p>
+            </div>
+            {
+              localizeBannerLink(banner.link) ? (
+                <a
+                  class="carousel-hit-area"
+                  href={localizeBannerLink(banner.link)}
+                  aria-label={messages.common.openExternal}
+                ></a>
+              ) : null
+            }
+          </article>
+        ))
+      }
+    </div>
+
+    <button class="carousel-nav prev" aria-label="Previous" data-prev>‹</button>
+    <button class="carousel-nav next" aria-label="Next" data-next>›</button>
+
+    <div class="carousel-dots" role="tablist">
+      {
+        banners.map((banner, index) => (
+          <button
+            class={`carousel-dot ${index === 0 ? "is-active" : ""}`}
+            data-dot={index}
+            aria-label={`Go to slide ${banner.id}`}
+          ></button>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const carouselRoot = document.querySelector("[data-carousel]");
+
+  if (carouselRoot instanceof HTMLElement) {
+    const track = carouselRoot.querySelector(".carousel-track");
+    const slides = Array.from(carouselRoot.querySelectorAll(".carousel-slide"));
+    const dots = Array.from(carouselRoot.querySelectorAll(".carousel-dot"));
+    const prevButton = carouselRoot.querySelector("[data-prev]");
+    const nextButton = carouselRoot.querySelector("[data-next]");
+
+    if (track instanceof HTMLElement && slides.length > 0) {
+      let currentIndex = 0;
+      let autoTimer;
+
+      const update = () => {
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach((dot, idx) => {
+          if (!(dot instanceof HTMLElement)) return;
+          dot.classList.toggle("is-active", idx === currentIndex);
+        });
+      };
+
+      const goTo = (index) => {
+        currentIndex = (index + slides.length) % slides.length;
+        update();
+      };
+
+      const startAuto = () => {
+        stopAuto();
+        autoTimer = window.setInterval(() => {
+          goTo(currentIndex + 1);
+        }, 5000);
+      };
+
+      const stopAuto = () => {
+        if (autoTimer) {
+          window.clearInterval(autoTimer);
+        }
+      };
+
+      if (prevButton instanceof HTMLElement) {
+        prevButton.addEventListener("click", () => goTo(currentIndex - 1));
+      }
+
+      if (nextButton instanceof HTMLElement) {
+        nextButton.addEventListener("click", () => goTo(currentIndex + 1));
+      }
+
+      dots.forEach((dot, idx) => {
+        if (!(dot instanceof HTMLElement)) return;
+        dot.addEventListener("click", () => goTo(idx));
+      });
+
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      track.addEventListener("touchstart", (event) => {
+        touchStartX = event.changedTouches[0]?.clientX || 0;
+      });
+
+      track.addEventListener("touchend", (event) => {
+        touchEndX = event.changedTouches[0]?.clientX || 0;
+        const delta = touchEndX - touchStartX;
+        if (Math.abs(delta) > 40) {
+          goTo(delta < 0 ? currentIndex + 1 : currentIndex - 1);
+        }
+      });
+
+      carouselRoot.addEventListener("mouseenter", stopAuto);
+      carouselRoot.addEventListener("mouseleave", startAuto);
+
+      update();
+      startAuto();
+    }
+  }
+</script>

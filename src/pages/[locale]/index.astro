@@ -1,0 +1,42 @@
+---
+import Header from "@/components/Header.astro";
+import HomeCarousel from "@/components/HomeCarousel.astro";
+import RecentSongsSection from "@/components/RecentSongsSection.astro";
+import SongSilenceCountdown from "@/components/SongSilenceCountdown.astro";
+import NewsSection from "@/components/NewsSection.astro";
+import Footer from "@/components/Footer.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import FloatingPlaylistPlayer from "@/components/FloatingPlaylistPlayer.astro";
+import { getHomeBanners, getNews, getSongs } from "@/lib/content";
+import { isLocale, locales } from "@/lib/i18n";
+import { getMessages } from "@/i18n/messages";
+import type { Locale } from "@/types/content";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const localeParam = Astro.params.locale;
+if (!isLocale(localeParam)) {
+  throw new Error(`Invalid locale: ${localeParam}`);
+}
+
+const locale: Locale = localeParam;
+const messages = getMessages(locale);
+
+const [songs, news, banners] = await Promise.all([getSongs(), getNews(), getHomeBanners()]);
+const sortedNews = [...news].sort((a, b) => b.date.localeCompare(a.date));
+const activeBanners = [...banners].filter((item) => item.active).sort((a, b) => a.order - b.order);
+---
+
+<BaseLayout title={`${messages.siteTitle} | Chalili Fans`} description={messages.siteSubtitle} locale={locale}>
+  <Header locale={locale} pathSuffix="" messages={messages} />
+  <main class="page-main">
+    <HomeCarousel locale={locale} banners={activeBanners} messages={messages} />
+    <RecentSongsSection locale={locale} songs={songs} messages={messages} />
+    <SongSilenceCountdown locale={locale} songs={songs} messages={messages} />
+    <NewsSection locale={locale} news={sortedNews} messages={messages} />
+  </main>
+  <FloatingPlaylistPlayer />
+  <Footer />
+</BaseLayout>

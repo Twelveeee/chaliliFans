@@ -1,0 +1,152 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import { getSongs } from "@/lib/content";
+import { getText, isLocale, locales } from "@/lib/i18n";
+import { getMessages } from "@/i18n/messages";
+import type { Locale, Song } from "@/types/content";
+
+interface PageProps {
+  song: Song;
+}
+
+export async function getStaticPaths() {
+  const songs = await getSongs();
+  return locales.flatMap((locale) => songs.map((song) => ({ params: { locale, songId: song.id }, props: { song } })));
+}
+
+const localeParam = Astro.params.locale;
+if (!isLocale(localeParam)) {
+  throw new Error(`Invalid locale: ${localeParam}`);
+}
+
+const locale: Locale = localeParam;
+const messages = getMessages(locale);
+const { song } = Astro.props as PageProps;
+const resolvedSongDescription = getText(song.description, locale).trim();
+const songDescription = resolvedSongDescription === "-" ? "" : resolvedSongDescription;
+const arranger = song.arranger.trim();
+const producer = song.producer.trim();
+---
+
+<BaseLayout
+  title={`${getText(song.title, locale)} | ${messages.siteTitle}`}
+  description={songDescription || getText(song.title, locale)}
+  locale={locale}
+>
+  <Header locale={locale} pathSuffix={`/music/${song.id}`} messages={messages} />
+  <main class="page-main shell">
+    <a href={`/${locale}`} class="btn btn-outline">{messages.cta.backHome}</a>
+
+    <section class="song-detail">
+      <div class="song-cover">
+        <img src={song.cover} alt={getText(song.title, locale)} loading="eager" />
+      </div>
+
+      <article class="song-content card">
+        <h1>{getText(song.title, locale)}</h1>
+
+        <p>
+          <strong>{messages.common.releaseDate}:</strong>
+          <span>{song.releaseDate}</span>
+        </p>
+
+        {
+          songDescription ? (
+            <p>
+              <strong>{messages.common.songIntro}:</strong>
+              <span>{songDescription}</span>
+            </p>
+          ) : null
+        }
+
+        <p>
+          <strong>{messages.common.artist}:</strong>
+          <span>{song.artist || "-"}</span>
+        </p>
+
+        <p>
+          <strong>{messages.common.lyricist}:</strong>
+          <span>{song.lyricist || "-"}</span>
+        </p>
+
+        <p>
+          <strong>{messages.common.composer}:</strong>
+          <span>{song.composer || "-"}</span>
+        </p>
+
+        {
+          arranger ? (
+            <p>
+              <strong>{messages.common.arranger}:</strong>
+              <span>{arranger}</span>
+            </p>
+          ) : null
+        }
+
+        {
+          producer ? (
+            <p>
+              <strong>{messages.common.producer}:</strong>
+              <span>{producer}</span>
+            </p>
+          ) : null
+        }
+
+        {
+          song.platformLinks.netease || song.platformLinks.qq || song.platformLinks.bilibili ? (
+            <div class="platform-buttons">
+              {
+                song.platformLinks.netease ? (
+                  <a
+                    href={song.platformLinks.netease}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-primary"
+                  >
+                    {messages.cta.netease}
+                  </a>
+                ) : null
+              }
+              {
+                song.platformLinks.qq ? (
+                  <a href={song.platformLinks.qq} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    {messages.cta.qq}
+                  </a>
+                ) : null
+              }
+              {
+                song.platformLinks.bilibili ? (
+                  <a href={song.platformLinks.bilibili} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                    {messages.cta.bilibili}
+                  </a>
+                ) : null
+              }
+            </div>
+          ) : (
+            <p>{messages.common.noLink}</p>
+          )
+        }
+
+        {
+          song.neteaseSongId ? (
+            <div class="detail-iframe card">
+              <iframe
+                frameborder="no"
+                border="0"
+                marginwidth="0"
+                marginheight="0"
+                width="330"
+                height="86"
+                src={`//music.163.com/outchain/player?type=2&id=${song.neteaseSongId}&auto=1&height=66`}
+                title={`${getText(song.title, locale)} NetEase player`}
+              ></iframe>
+            </div>
+          ) : null
+        }
+      </article>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,31 @@
+---
+import Header from "@/components/Header.astro";
+import VideoSection from "@/components/VideoSection.astro";
+import Footer from "@/components/Footer.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageHero from "@/components/PageHero.astro";
+import { isLocale, locales } from "@/lib/i18n";
+import { getMessages } from "@/i18n/messages";
+import type { Locale } from "@/types/content";
+
+export function getStaticPaths() {
+  return locales.map((locale) => ({ params: { locale } }));
+}
+
+const localeParam = Astro.params.locale;
+if (!isLocale(localeParam)) {
+  throw new Error(`Invalid locale: ${localeParam}`);
+}
+
+const locale: Locale = localeParam;
+const messages = getMessages(locale);
+---
+
+<BaseLayout title={`${messages.nav.video} | ${messages.siteTitle}`} description={messages.siteSubtitle} locale={locale}>
+  <Header locale={locale} pathSuffix="/video" messages={messages} />
+  <main class="page-main">
+    <PageHero title={messages.sections.video} subtitle={messages.siteSubtitle} />
+    <VideoSection messages={messages} />
+  </main>
+  <Footer />
+</BaseLayout>

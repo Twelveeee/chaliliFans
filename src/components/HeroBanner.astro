@@ -1,0 +1,19 @@
+---
+import type { Messages } from "@/i18n/messages";
+
+interface Props {
+  messages: Messages;
+}
+
+const { messages } = Astro.props;
+---
+
+<section class="hero" aria-label="Hero">
+  <img src="/assets/images/chalili-stage.svg" alt="Chalili stage visual" class="hero-bg" loading="eager" />
+  <div class="hero-overlay"></div>
+  <div class="shell hero-content">
+    <p class="eyebrow">Chalili Fans Website</p>
+    <h1>{messages.siteTitle}</h1>
+    <p class="hero-subtitle">{messages.siteSubtitle}</p>
+  </div>
+</section>

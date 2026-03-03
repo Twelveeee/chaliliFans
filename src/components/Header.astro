@@ -1,0 +1,69 @@
+---
+import type { Locale } from "@/types/content";
+import type { Messages } from "@/i18n/messages";
+
+interface Props {
+  locale: Locale;
+  pathSuffix: string;
+  messages: Messages;
+}
+
+const { locale, pathSuffix, messages } = Astro.props;
+const languages: Array<{ value: Locale; label: string }> = [
+  { value: "zh", label: "中文" },
+  { value: "en", label: "English" },
+  { value: "ja", label: "日本語" }
+];
+
+const languageTargets = languages.map((item) => ({
+  ...item,
+  href: `/${item.value}${pathSuffix}`
+}));
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="site-logo" href={`/${locale}`}>Chalili Fans</a>
+
+    <nav class="site-nav" aria-label="Main">
+      <a href={`/${locale}`}>{messages.nav.home}</a>
+      <a href={`/${locale}/bio`}>{messages.nav.bio}</a>
+      <a href={`/${locale}/music`}>{messages.nav.music}</a>
+      <a href="https://space.bilibili.com/684169" target="_blank" rel="noopener noreferrer">{messages.nav.video}</a>
+      <a href={`/${locale}/fan`}>{messages.nav.fan}</a>
+      <a href={`/${locale}/news`}>{messages.nav.news}</a>
+    </nav>
+
+    <label class="lang-switch" aria-label={messages.common.switchLanguage}>
+      <span>{messages.common.switchLanguage}</span>
+      <select id="language-switch" data-locale={locale} data-path-suffix={pathSuffix}>
+        {
+          languageTargets.map((item) => (
+            <option value={item.href} selected={item.value === locale}>
+              {item.label}
+            </option>
+          ))
+        }
+      </select>
+    </label>
+  </div>
+</header>
+
+<script>
+  const languageSelect = document.querySelector("#language-switch");
+
+  if (languageSelect instanceof HTMLSelectElement) {
+    languageSelect.addEventListener("change", async () => {
+      const target = languageSelect.value;
+      const selectedLocale = target.split("/")[1] || "zh";
+      const fallback = `/${selectedLocale}`;
+
+      try {
+        const response = await fetch(target, { method: "HEAD" });
+        location.href = response.ok ? target : fallback;
+      } catch {
+        location.href = fallback;
+      }
+    });
+  }
+</script>

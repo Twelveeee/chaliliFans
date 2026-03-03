@@ -1,0 +1,62 @@
+---
+import type { Locale } from "@/types/content";
+import type { Messages } from "@/i18n/messages";
+
+interface Props {
+  locale: Locale;
+  messages: Messages;
+}
+
+const { locale, messages } = Astro.props;
+
+const shortBio = {
+  zh: "茶理理（Chalili）是活跃于中文 ACG 与网络音乐生态的歌手，以细腻表达、跨语种演唱和叙事感见长。",
+  en: "Chalili is a singer active in the Chinese ACG and online music scene, known for delicate expression and multilingual vocals.",
+  ja: "茶理理（Chalili）は中国のACG・ネット音楽シーンで活動する歌手で、繊細な表現力と多言語歌唱で知られています。"
+};
+
+const longBio = {
+  zh: "她长期保持高质量作品输出，在游戏相关音乐、翻唱演绎与个人表达之间建立了稳定风格。舞台感、叙事节奏与情绪层次是她最具辨识度的标签。这个站点用于集中整理她的动态、歌曲与粉丝内容，形成可持续维护的资料入口。",
+  en: "She has consistently delivered high-quality works, balancing game-related tracks, covers, and personal expression. Stage presence, narrative pacing, and emotional layering define her style. This website serves as a structured hub for updates, songs, and fan content.",
+  ja: "彼女はゲーム関連楽曲、カバー、オリジナル表現をバランスよく継続し、安定したクオリティを保っています。ステージ感、物語のテンポ、感情のレイヤーが大きな特徴です。本サイトは最新情報・楽曲・ファン向け情報を集約するハブとして設計されています。"
+};
+
+const lines = {
+  zh: "音乐人 / 唱见 / 叙事系声线",
+  en: "Singer / Cover Artist / Narrative Vocal Style",
+  ja: "シンガー / 歌い手 / ナラティブボーカル"
+};
+
+const textShort = shortBio[locale] || shortBio.zh;
+const textLong = longBio[locale] || longBio.zh;
+const line = lines[locale] || lines.zh;
+---
+
+<section class="section shell">
+  <div class="section-head">
+    <h2>{messages.sections.bio}</h2>
+  </div>
+  <div class="bio-grid">
+    <div class="bio-gallery">
+      <img src="/assets/images/chalili-portrait.jpg" alt="Chalili portrait" loading="lazy" />
+      <img src="/assets/images/chalili-stage.svg" alt="Chalili stage" loading="lazy" />
+    </div>
+    <div class="bio-content card">
+      <h3>茶理理 Chalili</h3>
+      <p class="bio-line">{line}</p>
+      <p>{textShort}</p>
+      <details open>
+        <summary>{messages.common.longBioTitle}</summary>
+        <p>{textLong}</p>
+      </details>
+      <div class="social-row">
+        <a href="https://space.bilibili.com/684169" target="_blank" rel="noopener noreferrer">Bilibili</a>
+        <a href="https://weibo.com/u/3437956764" target="_blank" rel="noopener noreferrer">Weibo</a>
+        <a href="https://music.163.com/artist?id=1003026" target="_blank" rel="noopener noreferrer">NetEase</a>
+      </div>
+      <p class="business-email">
+        {messages.common.businessEmail}: <a href="mailto:heychalili@163.com">heychalili@163.com</a>
+      </p>
+    </div>
+  </div>
+</section>

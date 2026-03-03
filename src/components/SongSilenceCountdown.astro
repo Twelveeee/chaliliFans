@@ -1,0 +1,160 @@
+---
+import { getText } from "@/lib/i18n";
+import type { Messages } from "@/i18n/messages";
+import type { Locale, Song } from "@/types/content";
+
+interface Props {
+  locale: Locale;
+  songs: Song[];
+  messages: Messages;
+}
+
+interface SongWithEpoch {
+  song: Song;
+  releaseEpochMs: number;
+}
+
+const { locale, songs, messages } = Astro.props;
+
+function parseShanghaiReleaseEpoch(releaseDate: string): number | null {
+  const match = /^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}):(\d{2})(?::(\d{2}))?)?$/.exec(releaseDate.trim());
+  if (!match) return null;
+
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const hours = match[4] ? Number(match[4]) : 0;
+  const minutes = match[5] ? Number(match[5]) : 0;
+  const seconds = match[6] ? Number(match[6]) : 0;
+  if (
+    !Number.isInteger(year) ||
+    !Number.isInteger(month) ||
+    !Number.isInteger(day) ||
+    !Number.isInteger(hours) ||
+    !Number.isInteger(minutes) ||
+    !Number.isInteger(seconds)
+  ) {
+    return null;
+  }
+  if (hours > 23 || minutes > 59 || seconds > 59) return null;
+
+  // Convert "Asia/Shanghai local datetime" to epoch milliseconds.
+  const shanghaiOffsetMs = 8 * 60 * 60 * 1000;
+  const shanghaiDateTimeAsUtc = Date.UTC(year, month - 1, day, hours, minutes, seconds);
+  const epochMs = shanghaiDateTimeAsUtc - shanghaiOffsetMs;
+  const date = new Date(epochMs + shanghaiOffsetMs);
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day ||
+    date.getUTCHours() !== hours ||
+    date.getUTCMinutes() !== minutes ||
+    date.getUTCSeconds() !== seconds
+  ) {
+    return null;
+  }
+
+  return epochMs;
+}
+
+function splitDuration(durationMs: number): { days: number; hours: number; minutes: number; seconds: number } {
+  const totalSeconds = Math.floor(Math.max(0, durationMs) / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  return { days, hours, minutes, seconds };
+}
+
+const validSongs: SongWithEpoch[] = songs
+  .map((song) => {
+    const releaseEpochMs = parseShanghaiReleaseEpoch(song.releaseDate);
+    return releaseEpochMs === null ? null : { song, releaseEpochMs };
+  })
+  .filter((item): item is SongWithEpoch => item !== null);
+
+const latestSong = validSongs.length
+  ? validSongs.reduce((latest, current) => (current.releaseEpochMs > latest.releaseEpochMs ? current : latest))
+  : null;
+const latestSongHref = latestSong ? `/${locale}/music/${latestSong.song.id}` : "";
+
+const initialDurationMs = latestSong ? Math.max(0, Date.now() - latestSong.releaseEpochMs) : 0;
+const initialCounter = splitDuration(initialDurationMs);
+---
+
+<section class="section shell song-silence-section" aria-label={messages.countdown.title}>
+  <div class="card song-silence-card">
+    <div class="song-silence-head">
+      <h2>{messages.countdown.title}</h2>
+      {
+        latestSong ? (
+          <p>
+            {messages.countdown.sinceLabel}
+            <a href={latestSongHref} class="song-silence-link">
+              {getText(latestSong.song.title, locale)}
+            </a>
+            <span class="song-silence-date">({latestSong.song.releaseDate})</span>
+          </p>
+        ) : (
+          <p>{messages.countdown.noData}</p>
+        )
+      }
+    </div>
+
+    {
+      latestSong ? (
+        <div class="song-silence-grid" data-song-silence-countdown data-release-epoch={String(latestSong.releaseEpochMs)}>
+          <div class="song-silence-block">
+            <strong data-unit="days">{initialCounter.days}</strong>
+            <span>{messages.countdown.days}</span>
+          </div>
+          <div class="song-silence-block">
+            <strong data-unit="hours">{String(initialCounter.hours).padStart(2, "0")}</strong>
+            <span>{messages.countdown.hours}</span>
+          </div>
+          <div class="song-silence-block">
+            <strong data-unit="minutes">{String(initialCounter.minutes).padStart(2, "0")}</strong>
+            <span>{messages.countdown.minutes}</span>
+          </div>
+          <div class="song-silence-block">
+            <strong data-unit="seconds">{String(initialCounter.seconds).padStart(2, "0")}</strong>
+            <span>{messages.countdown.seconds}</span>
+          </div>
+        </div>
+      ) : null
+    }
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const countdown = document.querySelector("[data-song-silence-countdown]");
+    if (!(countdown instanceof HTMLElement)) return;
+
+    const releaseEpochMs = Number(countdown.dataset.releaseEpoch || "");
+    if (!Number.isFinite(releaseEpochMs)) return;
+
+    const daysElement = countdown.querySelector('[data-unit="days"]');
+    const hoursElement = countdown.querySelector('[data-unit="hours"]');
+    const minutesElement = countdown.querySelector('[data-unit="minutes"]');
+    const secondsElement = countdown.querySelector('[data-unit="seconds"]');
+
+    if (!daysElement || !hoursElement || !minutesElement || !secondsElement) return;
+
+    const update = () => {
+      const totalSeconds = Math.floor(Math.max(0, Date.now() - releaseEpochMs) / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      daysElement.textContent = String(days);
+      hoursElement.textContent = String(hours).padStart(2, "0");
+      minutesElement.textContent = String(minutes).padStart(2, "0");
+      secondsElement.textContent = String(seconds).padStart(2, "0");
+    };
+
+    update();
+    window.setInterval(update, 1000);
+  })();
+</script>

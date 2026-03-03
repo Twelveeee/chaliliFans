@@ -1,0 +1,30 @@
+---
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chalili Fans</title>
+    <meta name="description" content="Chalili Fans language entry" />
+  </head>
+  <body>
+    <script>
+      const browserLanguage = (navigator.language || "zh").toLowerCase();
+      let target = "/zh";
+
+      if (browserLanguage.startsWith("en")) {
+        target = "/en";
+      } else if (browserLanguage.startsWith("ja")) {
+        target = "/ja";
+      }
+
+      location.replace(target);
+    </script>
+
+    <noscript>
+      <a href="/zh">Open Chinese Home</a>
+    </noscript>
+  </body>
+</html>

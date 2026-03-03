@@ -1,0 +1,24 @@
+---
+import { getText } from "@/lib/i18n";
+import type { FanInfo, Locale } from "@/types/content";
+import type { Messages } from "@/i18n/messages";
+
+interface Props {
+  locale: Locale;
+  fanInfo: FanInfo;
+  messages: Messages;
+}
+
+const { locale, fanInfo, messages } = Astro.props;
+---
+
+<section class="section shell">
+  <div class="card fan-card">
+    <h2>{messages.sections.fan}</h2>
+    <p>{getText(fanInfo.intro, locale)}</p>
+    <p>
+      <strong>{messages.common.qqGroup}:</strong>
+      <span class="qq-number">{fanInfo.qqGroupId}</span>
+    </p>
+  </div>
+</section>

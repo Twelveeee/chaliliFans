@@ -1,0 +1,54 @@
+---
+import { getText } from "@/lib/i18n";
+import type { Messages } from "@/i18n/messages";
+import type { Locale, Song } from "@/types/content";
+
+interface Props {
+  locale: Locale;
+  songs: Song[];
+  messages: Messages;
+}
+
+const { locale, songs, messages } = Astro.props;
+
+const dateLocale = locale === "zh" ? "zh-CN" : locale === "ja" ? "ja-JP" : "en-US";
+
+function resolveSongDescription(song: Song): string {
+  const description = getText(song.description, locale).trim();
+  return description === "-" ? "" : description;
+}
+---
+
+<section class="section shell">
+  <div class="section-head">
+    <h2>{messages.sections.music}</h2>
+  </div>
+
+  <div class="music-grid">
+    {
+      songs.map((song) => {
+        const songDescription = resolveSongDescription(song);
+        return (
+          <article class="music-card card">
+            <img src={song.cover} alt={getText(song.title, locale)} loading="lazy" />
+            <div class="music-card-body">
+              <h3>{getText(song.title, locale)}</h3>
+              {songDescription ? <p>{songDescription}</p> : null}
+              <p class="meta-row">
+                <span>{messages.common.artist}</span>
+                <span>{song.artist || "-"}</span>
+              </p>
+              <p class="meta-row">
+                <span>{messages.common.releaseDate}</span>
+                <span>{new Date(song.releaseDate).toLocaleDateString(dateLocale)}</span>
+              </p>
+              <a class="btn btn-outline" href={`/${locale}/music/${song.id}`}>
+                {messages.cta.toDetail}
+              </a>
+            </div>
+          </article>
+        );
+      })
+    }
+  </div>
+</section>

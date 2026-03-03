@@ -1,0 +1,24 @@
+---
+import type { Messages } from "@/i18n/messages";
+
+interface Props {
+  messages: Messages;
+}
+
+const { messages } = Astro.props;
+---
+
+<section class="section shell">
+  <div class="card callout">
+    <h2>{messages.sections.video}</h2>
+    <p>https://space.bilibili.com/684169</p>
+    <a
+      href="https://space.bilibili.com/684169"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn btn-primary"
+    >
+      {messages.cta.watchVideo}
+    </a>
+  </div>
+</section>
