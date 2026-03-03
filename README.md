@@ -2,6 +2,10 @@
 
 一个基于 Astro 的茶理理粉丝站静态网站项目，支持多语言（`zh / en / ja`）和数据驱动内容维护。
 
+## Demo
+
+[https://chalilifans.12dev.us/](https://chalilifans.12dev.us/)
+
 ## 当前功能
 
 - 多语言路由与页面：
