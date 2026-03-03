@@ -24,7 +24,7 @@ const dateLocale = locale === "zh" ? "zh-CN" : locale === "ja" ? "ja-JP" : "en-U
         <article class="card news-card">
           <p class="news-date">{new Date(item.date).toLocaleDateString(dateLocale)}</p>
           <h3>{getText(item.title, locale)}</h3>
-          <p>{getText(item.content, locale)}</p>
+          <p class="news-content">{getText(item.content, locale)}</p>
           {
             item.link ? (
               <a href={item.link} target="_blank" rel="noopener noreferrer" class="news-link">

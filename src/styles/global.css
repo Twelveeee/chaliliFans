@@ -381,6 +381,10 @@ a {
   margin: 0.44rem 0;
 }
 
+.news-content {
+  white-space: pre-line;
+}
+
 .page-hero {
   padding-top: 0.5rem;
 }
@@ -620,24 +624,39 @@ a {
 
 @media (max-width: 768px) {
   .header-inner {
-    grid-template-columns: 1fr;
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    row-gap: 0.55rem;
     padding: 0.7rem 0;
   }
 
+  .site-logo {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
   .site-nav {
+    grid-row: 2;
+    grid-column: 1 / -1;
     justify-content: flex-start;
     overflow-x: auto;
     white-space: nowrap;
   }
 
   .lang-switch {
-    width: 100%;
-    justify-content: space-between;
+    grid-row: 1;
+    grid-column: 2;
+    width: auto;
+    justify-content: flex-end;
+    gap: 0.35rem;
+  }
+
+  .lang-switch span {
+    display: none;
   }
 
   .lang-switch select {
-    width: 150px;
+    width: 118px;
   }
 
   .carousel-slide {
