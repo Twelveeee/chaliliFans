@@ -1,0 +1,53 @@
+[
+  {
+    "id": "home-banner-1",
+    "title": {
+      "zh": "茶理理最新动态",
+      "en": "Latest from Chalili",
+      "ja": "茶理理の最新情報"
+    },
+    "subtitle": {
+      "zh": "持续更新的新作与现场片段",
+      "en": "Fresh releases and live highlights",
+      "ja": "新作とライブハイライトを継続更新"
+    },
+    "image": "/assets/images/banner-live.svg",
+    "link": "/zh/music",
+    "order": 1,
+    "active": true
+  },
+  {
+    "id": "home-banner-2",
+    "title": {
+      "zh": "声音、故事与热爱",
+      "en": "Voice, stories, and passion",
+      "ja": "声と物語、そして情熱"
+    },
+    "subtitle": {
+      "zh": "在同一个空间里汇合",
+      "en": "Merged into one curated space",
+      "ja": "ひとつの場所でつながる"
+    },
+    "image": "/assets/images/banner-story.svg",
+    "link": "/zh/bio",
+    "order": 2,
+    "active": true
+  },
+  {
+    "id": "home-banner-3",
+    "title": {
+      "zh": "从这里进入音乐宇宙",
+      "en": "Enter the music universe",
+      "ja": "ここから音楽の世界へ"
+    },
+    "subtitle": {
+      "zh": "完整曲目、详情页和平台直达",
+      "en": "Full discography, details, and platform links",
+      "ja": "全楽曲・詳細ページ・配信リンクを集約"
+    },
+    "image": "/assets/images/banner-music.svg",
+    "link": "/zh/music",
+    "order": 3,
+    "active": true
+  }
+]

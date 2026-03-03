@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" role="img" aria-label="Music banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#052e39"/>
+      <stop offset="100%" stop-color="#20a6a3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="700" fill="url(#bg)"/>
+  <circle cx="280" cy="180" r="130" fill="#c3fff5" opacity="0.28"/>
+  <circle cx="280" cy="180" r="74" fill="#dffff9" opacity="0.92"/>
+  <path d="M0 590 C 260 500, 520 660, 760 560 C 1040 450, 1260 620, 1600 520 L1600 700 L0 700 Z" fill="#0f6f74" opacity="0.82"/>
+  <text x="560" y="180" fill="#e9fffd" font-size="70" font-family="'Noto Serif SC',serif">Music Universe</text>
+</svg>
