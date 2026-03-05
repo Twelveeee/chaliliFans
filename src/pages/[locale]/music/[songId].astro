@@ -3,6 +3,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import { getSongs } from "@/lib/content";
+import { getSongDisplayDescription } from "@/lib/song";
 import { getText, isLocale, locales } from "@/lib/i18n";
 import { getMessages } from "@/i18n/messages";
 import type { Locale, Song } from "@/types/content";
@@ -24,8 +25,7 @@ if (!isLocale(localeParam)) {
 const locale: Locale = localeParam;
 const messages = getMessages(locale);
 const { song } = Astro.props as PageProps;
-const resolvedSongDescription = getText(song.description, locale).trim();
-const songDescription = resolvedSongDescription === "-" ? "" : resolvedSongDescription;
+const songDescription = getSongDisplayDescription(song, locale);
 const arranger = song.arranger.trim();
 const producer = song.producer.trim();
 ---
@@ -56,7 +56,7 @@ const producer = song.producer.trim();
           songDescription ? (
             <p>
               <strong>{messages.common.songIntro}:</strong>
-              <span>{songDescription}</span>
+              <span class="song-description">{songDescription}</span>
             </p>
           ) : null
         }

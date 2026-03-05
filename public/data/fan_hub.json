@@ -1,0 +1,78 @@
+{
+  "disclaimer": {
+    "zh": "本站为粉丝自建资料站，非茶理理官方渠道。",
+    "en": "This website is fan-made and is not an official channel of Chalili.",
+    "ja": "本サイトはファン制作の資料サイトであり、茶理理の公式窓口ではありません。"
+  },
+  "starterSongs": ["song-103", "song-100", "song-096"],
+  "starterVideos": [
+    {
+      "title": {
+        "zh": "《失窃月光曲》MV",
+        "en": "'Moonlight Heist' MV",
+        "ja": "『失窃月光曲』MV"
+      },
+      "url": "https://www.bilibili.com/video/BV1dnEbzTEyL/",
+      "reason": {
+        "zh": "近期代表作，编曲与情绪推进都很有辨识度。",
+        "en": "A recent representative release with strong arrangement and emotional pacing.",
+        "ja": "最近の代表作で、編曲と感情の展開が特に印象的です。"
+      }
+    },
+    {
+      "title": {
+        "zh": "《Go for Your Future -Chinese version-》MV",
+        "en": "'Go for Your Future -Chinese version-' MV",
+        "ja": "『Go for Your Future -Chinese version-』MV"
+      },
+      "url": "https://www.bilibili.com/video/BV1eZqwYaEGV/",
+      "reason": {
+        "zh": "合作项目中的高完成度演绎，适合快速了解她的声线表现。",
+        "en": "A polished collaboration performance that quickly shows her vocal style.",
+        "ja": "コラボ作品での完成度が高く、声の魅力を短時間で把握できます。"
+      }
+    }
+  ],
+  "faq": [
+    {
+      "q": {
+        "zh": "这是官方站吗？",
+        "en": "Is this an official website?",
+        "ja": "これは公式サイトですか？"
+      },
+      "a": {
+        "zh": "不是。本站是粉丝维护的资料站，内容会尽量核对来源，但不代表官方立场。",
+        "en": "No. This is a fan-maintained archive. We try to verify sources, but it does not represent official positions.",
+        "ja": "いいえ。ファンが運営する資料サイトです。情報は可能な限り出典確認しますが、公式見解を代表するものではありません。"
+      }
+    },
+    {
+      "q": {
+        "zh": "可以进行二创吗？",
+        "en": "Can I create fan works?",
+        "ja": "二次創作は可能ですか？"
+      },
+      "a": {
+        "zh": "欢迎非商用二创，请务必注明来源并遵守原平台与作品版权规范。",
+        "en": "Non-commercial fan works are welcome. Please credit sources and follow platform and copyright rules.",
+        "ja": "非商用の二次創作は歓迎です。出典表記と各プラットフォーム・著作権ルールの順守をお願いします。"
+      }
+    },
+    {
+      "q": {
+        "zh": "如何向本站投稿或补充资料？",
+        "en": "How can I submit updates to this site?",
+        "ja": "このサイトへの情報追加はどうすればよいですか？"
+      },
+      "a": {
+        "zh": "欢迎在 GitHub 主页参与协作（Issue / PR），提交歌曲或动态链接与简要说明，维护者核对后更新。",
+        "en": "Contribute from the GitHub homepage (Issue / PR) with links and short notes. Maintainers will update after verification.",
+        "ja": "GitHubページ（Issue / PR）から協力できます。楽曲やニュースのリンクと補足を送ってください。確認後に反映します。"
+      }
+    }
+  ],
+  "contribute": {
+    "label": "GitHub",
+    "url": "https://github.com/Twelveeee/chaliliFans"
+  }
+}

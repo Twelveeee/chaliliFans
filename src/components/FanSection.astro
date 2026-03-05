@@ -1,24 +1,78 @@
 ---
 import { getText } from "@/lib/i18n";
-import type { FanInfo, Locale } from "@/types/content";
+import type { FanHub, FanInfo, Locale } from "@/types/content";
 import type { Messages } from "@/i18n/messages";
 
 interface Props {
   locale: Locale;
   fanInfo: FanInfo;
+  fanHub: FanHub;
   messages: Messages;
 }
 
-const { locale, fanInfo, messages } = Astro.props;
+const { locale, fanInfo, fanHub, messages } = Astro.props;
+
+function isValidHttpUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" || parsed.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
+const faqItems = fanHub.faq.filter((item) => item.q?.zh && item.a?.zh);
+const contributeUrl = isValidHttpUrl(fanHub.contribute.url) ? fanHub.contribute.url : "";
 ---
 
 <section class="section shell">
-  <div class="card fan-card">
-    <h2>{messages.sections.fan}</h2>
-    <p>{getText(fanInfo.intro, locale)}</p>
-    <p>
-      <strong>{messages.common.qqGroup}:</strong>
-      <span class="qq-number">{fanInfo.qqGroupId}</span>
-    </p>
+  <div class="fan-hub-stack">
+    <div class="card fan-card">
+      <h2>{messages.sections.fan}</h2>
+      <p>{getText(fanInfo.intro, locale)}</p>
+      <p>
+        <strong>{messages.common.qqGroup}:</strong>
+        <span class="qq-number">{fanInfo.qqGroupId}</span>
+      </p>
+    </div>
+
+    <div class="card fan-hub-card">
+      <h3>{messages.sections.fanDisclaimer}</h3>
+      <p>{getText(fanHub.disclaimer, locale) || messages.common.fanMadeNotice}</p>
+    </div>
+
+    <div class="card fan-hub-card">
+      <h3>{messages.sections.fanFaq}</h3>
+      {
+        faqItems.length ? (
+          <dl class="fan-faq-list">
+            {
+              faqItems.map((item) => (
+                <>
+                  <dt>{getText(item.q, locale)}</dt>
+                  <dd>{getText(item.a, locale)}</dd>
+                </>
+              ))
+            }
+          </dl>
+        ) : (
+          <p>{messages.common.faqEmpty}</p>
+        )
+      }
+    </div>
+
+    <div class="card fan-hub-card">
+      <h3>{messages.sections.fanContribute}</h3>
+      <p>{messages.common.submitVia}</p>
+      {
+        contributeUrl ? (
+          <a href={contributeUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            {fanHub.contribute.label}
+          </a>
+        ) : (
+          <p>{messages.common.noLink}</p>
+        )
+      }
+    </div>
   </div>
 </section>

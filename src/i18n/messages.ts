@@ -27,6 +27,11 @@ export interface Messages {
     music: string;
     news: string;
     recentSongs: string;
+    fanDisclaimer: string;
+    fanStarter: string;
+    fanFaq: string;
+    fanContribute: string;
+    bioSources: string;
   };
   countdown: {
     title: string;
@@ -56,6 +61,12 @@ export interface Messages {
     composer: string;
     arranger: string;
     producer: string;
+    lastUpdated: string;
+    source: string;
+    fanMadeNotice: string;
+    submitVia: string;
+    faqEmpty: string;
+    starterEmpty: string;
   };
 }
 
@@ -86,7 +97,12 @@ const dictionary: Record<Locale, Messages> = {
       fan: "粉丝区",
       music: "音乐",
       news: "最新动态",
-      recentSongs: "最近歌曲"
+      recentSongs: "最近歌曲",
+      fanDisclaimer: "声明",
+      fanStarter: "入坑指南",
+      fanFaq: "常见问题",
+      fanContribute: "Contribute",
+      bioSources: "资料来源与声明"
     },
     countdown: {
       title: "茶理理已经多久没有发歌了",
@@ -115,7 +131,13 @@ const dictionary: Record<Locale, Messages> = {
       lyricist: "作词",
       composer: "作曲",
       arranger: "编曲",
-      producer: "制作人"
+      producer: "制作人",
+      lastUpdated: "最后更新",
+      source: "来源",
+      fanMadeNotice: "粉丝站声明",
+      submitVia: "一起开发，欢迎访问站点 GitHub 主页：",
+      faqEmpty: "暂无常见问题条目",
+      starterEmpty: "暂无入坑推荐内容"
     }
   },
   en: {
@@ -144,7 +166,12 @@ const dictionary: Record<Locale, Messages> = {
       fan: "Fan",
       music: "Music",
       news: "Latest Updates",
-      recentSongs: "Recent Songs"
+      recentSongs: "Recent Songs",
+      fanDisclaimer: "Disclaimer",
+      fanStarter: "Getting Started",
+      fanFaq: "FAQ",
+      fanContribute: "Contribute",
+      bioSources: "Sources & Notice"
     },
     countdown: {
       title: "How long has Chalili not released a song?",
@@ -173,7 +200,13 @@ const dictionary: Record<Locale, Messages> = {
       lyricist: "Lyricist",
       composer: "Composer",
       arranger: "Arranger",
-      producer: "Producer"
+      producer: "Producer",
+      lastUpdated: "Last Updated",
+      source: "Source",
+      fanMadeNotice: "Fan Site Notice",
+      submitVia: "Contribute together on the site GitHub homepage:",
+      faqEmpty: "No FAQ items yet",
+      starterEmpty: "No starter recommendations available"
     }
   },
   ja: {
@@ -202,7 +235,12 @@ const dictionary: Record<Locale, Messages> = {
       fan: "ファン",
       music: "音楽",
       news: "最新情報",
-      recentSongs: "最近の楽曲"
+      recentSongs: "最近の楽曲",
+      fanDisclaimer: "免責事項",
+      fanStarter: "入門ガイド",
+      fanFaq: "よくある質問",
+      fanContribute: "投稿・協力",
+      bioSources: "出典と注記"
     },
     countdown: {
       title: "茶理理は最後の新曲公開からどれくらい経った？",
@@ -231,7 +269,13 @@ const dictionary: Record<Locale, Messages> = {
       lyricist: "作詞",
       composer: "作曲",
       arranger: "編曲",
-      producer: "プロデューサー"
+      producer: "プロデューサー",
+      lastUpdated: "最終更新",
+      source: "出典",
+      fanMadeNotice: "ファンサイト注記",
+      submitVia: "一緒に開発しましょう。サイトのGitHubページはこちら：",
+      faqEmpty: "FAQ項目はまだありません",
+      starterEmpty: "入門向けのおすすめはまだありません"
     }
   }
 };

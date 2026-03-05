@@ -4,7 +4,7 @@ import FanSection from "@/components/FanSection.astro";
 import Footer from "@/components/Footer.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageHero from "@/components/PageHero.astro";
-import { getFanInfo } from "@/lib/content";
+import { getFanHub, getFanInfo } from "@/lib/content";
 import { isLocale, locales } from "@/lib/i18n";
 import { getMessages } from "@/i18n/messages";
 import type { Locale } from "@/types/content";
@@ -20,14 +20,14 @@ if (!isLocale(localeParam)) {
 
 const locale: Locale = localeParam;
 const messages = getMessages(locale);
-const fanInfo = await getFanInfo();
+const [fanInfo, fanHub] = await Promise.all([getFanInfo(), getFanHub()]);
 ---
 
 <BaseLayout title={`${messages.nav.fan} | ${messages.siteTitle}`} description={messages.siteSubtitle} locale={locale}>
   <Header locale={locale} pathSuffix="/fan" messages={messages} />
   <main class="page-main">
     <PageHero title={messages.sections.fan} subtitle={messages.siteSubtitle} />
-    <FanSection locale={locale} fanInfo={fanInfo} messages={messages} />
+    <FanSection locale={locale} fanInfo={fanInfo} fanHub={fanHub} messages={messages} />
   </main>
   <Footer />
 </BaseLayout>

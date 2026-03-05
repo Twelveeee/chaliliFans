@@ -8,6 +8,22 @@
   --brand-2: #0f8db8;
   --accent: #d45174;
   --shadow: 0 18px 42px rgba(37, 19, 97, 0.14);
+  --font-sans:
+    "PingFang SC",
+    "Hiragino Sans GB",
+    "Microsoft YaHei",
+    "Noto Sans SC",
+    "Source Han Sans SC",
+    "Segoe UI",
+    Roboto,
+    system-ui,
+    sans-serif;
+  --font-display:
+    "Songti SC",
+    "STSong",
+    "Noto Serif SC",
+    "Source Han Serif SC",
+    serif;
 }
 
 * {
@@ -23,7 +39,15 @@ body {
     radial-gradient(circle at 88% 12%, #ddf2ff, transparent 26%),
     linear-gradient(180deg, #fffaf4, #f8f5ff 48%, #fff6fb 100%);
   color: var(--ink);
-  font-family: "Noto Serif SC", "Source Han Serif SC", "Hiragino Mincho ProN", Georgia, serif;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+.site-logo {
+  font-family: var(--font-display);
 }
 
 a {
@@ -476,6 +500,136 @@ a {
   margin-left: 0.35rem;
 }
 
+.fan-hub-stack {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.fan-hub-card {
+  padding: 1.15rem 1.2rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.fan-hub-card h3,
+.fan-hub-card h4,
+.fan-hub-card p {
+  margin: 0;
+}
+
+.fan-starter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.fan-starter-group {
+  border: 1px solid #e2d9ff;
+  border-radius: 14px;
+  padding: 0.85rem;
+  background: #fbf9ff;
+}
+
+.fan-starter-group h4 {
+  margin: 0 0 0.6rem;
+  color: #4d3a97;
+}
+
+.fan-starter-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.fan-starter-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.7rem;
+  border: 1px solid #e6deff;
+  border-radius: 12px;
+  padding: 0.65rem 0.7rem;
+  background: #fff;
+}
+
+.fan-starter-title {
+  font-weight: 700;
+  color: #30235a;
+}
+
+.fan-starter-meta {
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.87rem;
+  line-height: 1.45;
+}
+
+.fan-faq-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.fan-faq-list dt {
+  font-weight: 700;
+  color: #30235a;
+}
+
+.fan-faq-list dd {
+  margin: 0.3rem 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.bio-credibility {
+  margin-top: 1rem;
+  border-top: 1px solid #e3daff;
+  padding-top: 0.95rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.bio-credibility h4,
+.bio-credibility p {
+  margin: 0;
+}
+
+.bio-credibility-disclaimer,
+.bio-credibility-updated {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  color: var(--muted);
+}
+
+.bio-source-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.bio-source-list li {
+  border: 1px solid #e6deff;
+  border-radius: 12px;
+  padding: 0.65rem 0.75rem;
+  background: #fff;
+}
+
+.bio-source-list a {
+  color: var(--brand);
+  font-weight: 700;
+}
+
+.bio-source-list p {
+  margin-top: 0.3rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
 .music-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -511,6 +665,10 @@ a {
 
 .music-card-body p {
   color: var(--muted);
+}
+
+.song-description {
+  white-space: pre-line;
 }
 
 .music-card-body .btn {
@@ -694,6 +852,15 @@ a {
 
   .bio-grid {
     grid-template-columns: 1fr;
+  }
+
+  .fan-starter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fan-starter-item {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .music-grid {

@@ -1,13 +1,16 @@
 ---
+import { getText } from "@/lib/i18n";
 import type { Locale } from "@/types/content";
+import type { BioCredibility } from "@/types/content";
 import type { Messages } from "@/i18n/messages";
 
 interface Props {
   locale: Locale;
   messages: Messages;
+  bioCredibility: BioCredibility;
 }
 
-const { locale, messages } = Astro.props;
+const { locale, messages, bioCredibility } = Astro.props;
 
 const shortBio = {
   zh: "茶理理（Chalili）是活跃于中文 ACG 与网络音乐生态的歌手，以细腻表达、跨语种演唱和叙事感见长。",
@@ -30,6 +33,17 @@ const lines = {
 const textShort = shortBio[locale] || shortBio.zh;
 const textLong = longBio[locale] || longBio.zh;
 const line = lines[locale] || lines.zh;
+
+function isValidHttpUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === "https:" || parsed.protocol === "http:";
+  } catch {
+    return false;
+  }
+}
+
+const sourceItems = bioCredibility.sources.filter((item) => isValidHttpUrl(item.url));
 ---
 
 <section class="section shell">
@@ -57,6 +71,37 @@ const line = lines[locale] || lines.zh;
       <p class="business-email">
         {messages.common.businessEmail}: <a href="mailto:heychalili@163.com">heychalili@163.com</a>
       </p>
+
+      <div class="bio-credibility">
+        <h4>{messages.sections.bioSources}</h4>
+        <p class="bio-credibility-disclaimer">
+          <strong>{messages.common.fanMadeNotice}:</strong>
+          <span>{getText(bioCredibility.disclaimer, locale)}</span>
+        </p>
+        <p class="bio-credibility-updated">
+          <strong>{messages.common.lastUpdated}:</strong>
+          <span>{bioCredibility.lastUpdated}</span>
+        </p>
+
+        {
+          sourceItems.length ? (
+            <ul class="bio-source-list">
+              {
+                sourceItems.map((item) => (
+                  <li>
+                    <a href={item.url} target="_blank" rel="noopener noreferrer">
+                      {item.label}
+                    </a>
+                    {item.note ? <p>{getText(item.note, locale)}</p> : null}
+                  </li>
+                ))
+              }
+            </ul>
+          ) : (
+            <p>{messages.common.noLink}</p>
+          )
+        }
+      </div>
     </div>
   </div>
 </section>
