@@ -874,9 +874,6 @@ a {
   }
 
   .floating-player {
-    right: 8px;
-    bottom: 8px;
-    transform: scale(0.92);
-    transform-origin: bottom right;
+    display: none;
   }
 }
