@@ -1,6 +1,29 @@
 [
   {
     "title": {
+      "zh": "追逐！卡蕾多！"
+    },
+    "description": {
+      "zh": "《追逐卡蕾多》DokiDoki天降之吻？！概念PV曲"
+    },
+    "artist": "茶理理",
+    "lyricist": "",
+    "composer": "",
+    "arranger": "",
+    "producer": "飞驰蛤蜊唱片",
+    "cover": "/assets/covers/追逐！卡蕾多！.jpg",
+    "releaseDate": "2026-06-08 12:00:00",
+    "platformLinks": {
+      "bilibili": "https://www.bilibili.com/video/BV1fMV268E7X/?p=3"
+    },
+    "bilibiliDesc": {
+      "zh": "3P/4P：DokiDoki天降之吻？！概念PV《追逐！卡蕾多！》（中文/日文版）\n🎵《追逐！卡蕾多！》\n🎤中文版演唱：茶理理 / 日文版演唱：96猫\n💿出品：飞驰蛤蜊唱片"
+    },
+    "neteaseSongId": null,
+    "id": "song-104"
+  },
+  {
+    "title": {
       "zh": "失窃月光曲"
     },
     "description": {
