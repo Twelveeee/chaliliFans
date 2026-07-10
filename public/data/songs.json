@@ -1,6 +1,29 @@
 [
   {
     "title": {
+      "zh": "Floral Punch！"
+    },
+    "description": {
+      "zh": "《花仙子之魔法香对论》主题曲"
+    },
+    "artist": "茶理理",
+    "lyricist": "",
+    "composer": "",
+    "arranger": "",
+    "producer": "",
+    "cover": "/assets/covers/Floral Punch！.jpg",
+    "releaseDate": "2026-07-10 18:00:00",
+    "platformLinks": {
+      "bilibili": "https://www.bilibili.com/video/BV1FUN76wE66/"
+    },
+    "bilibiliDesc": {
+      "zh": "『花仙子之魔法香对论』主题曲《𝐅𝐥𝐨𝐫𝐚𝐥 𝐏𝐮𝐧𝐜𝐡！》\n跟随黑猫的脚印，\n奔赴独属于花仙子的魔法世界吧🔮\n演唱@茶理理\n\n7月4日起，每周四-周日10:00，锁定@腾讯视频\n伴随旋律中七色花的荧光，一起在生活中盛放♬\n\n🌸关注@茶理理 & @花仙子之魔法香对论 并转发本条内容，\n我们将在<7月24日>揪5位粉丝送出【茶理理签名周边色纸】1份~\n*周边将于8月统一寄出，请中奖观众耐心等待💝\n#花仙子之魔法香对论 #花仙子 #花二代回归"
+    },
+    "neteaseSongId": null,
+    "id": "song-105"
+  },
+  {
+    "title": {
       "zh": "追逐！卡蕾多！"
     },
     "description": {
