@@ -40,6 +40,19 @@ export interface FanInfo {
   intro: LocalizedText;
 }
 
+export interface FanSubmission {
+  id: string;
+  floor: number;
+  author: string;
+  content: string;
+  images: Array<{
+    src: string;
+    alt: LocalizedText;
+    width: number;
+    height: number;
+  }>;
+}
+
 export interface FanStarterVideo {
   title: LocalizedText;
   url: string;

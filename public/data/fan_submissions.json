@@ -1,0 +1,30 @@
+[
+  {
+    "id": "fan-001",
+    "floor": 1,
+    "author": "站长",
+    "content": "全体目光向我看齐！",
+    "images": [
+      {
+        "src": "/assets/fans_upload/fan-001-01.webp",
+        "alt": {
+          "zh": "写有加油、茶理理签名及手写日期的色纸",
+          "en": "Shikishi board with an encouraging message, Chalili’s signature, and a handwritten date",
+          "ja": "応援メッセージ、茶理理のサイン、手書きの日付が入った色紙"
+        },
+        "width": 1600,
+        "height": 1200
+      },
+      {
+        "src": "/assets/fans_upload/fan-001-02.webp",
+        "alt": {
+          "zh": "带有茶理理签名的彩色角色插画色纸",
+          "en": "Colorful character illustration board signed by Chalili",
+          "ja": "茶理理のサイン入りカラーキャラクターイラスト色紙"
+        },
+        "width": 1600,
+        "height": 1200
+      }
+    ]
+  }
+]

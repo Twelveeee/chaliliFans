@@ -65,14 +65,14 @@
         "ja": "このサイトへの情報追加はどうすればよいですか？"
       },
       "a": {
-        "zh": "欢迎在 GitHub 主页参与协作（Issue / PR），提交歌曲或动态链接与简要说明，维护者核对后更新。",
-        "en": "Contribute from the GitHub homepage (Issue / PR) with links and short notes. Maintainers will update after verification.",
-        "ja": "GitHubページ（Issue / PR）から協力できます。楽曲やニュースのリンクと補足を送ってください。確認後に反映します。"
+        "zh": "请将投稿文案、图片和希望展示的昵称，或歌曲、动态链接与简要说明发送至 chalilifans@12dev.us，维护者审核整理后发布。",
+        "en": "Email your text, images, and preferred display name, or song and news links with short notes, to chalilifans@12dev.us. Maintainers will review and prepare submissions before publication.",
+        "ja": "投稿本文・画像・掲載希望のニックネーム、または楽曲やニュースのリンクと補足を chalilifans@12dev.us までお送りください。管理者が内容を確認・整理したうえで掲載します。"
       }
     }
   ],
   "contribute": {
-    "label": "GitHub",
-    "url": "https://github.com/Twelveeee/chaliliFans"
+    "label": "chalilifans@12dev.us",
+    "url": "mailto:chalilifans@12dev.us"
   }
 }

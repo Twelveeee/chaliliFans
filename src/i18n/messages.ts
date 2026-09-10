@@ -31,6 +31,7 @@ export interface Messages {
     fanStarter: string;
     fanFaq: string;
     fanContribute: string;
+    fanSubmissions: string;
     bioSources: string;
   };
   countdown: {
@@ -65,6 +66,7 @@ export interface Messages {
     source: string;
     fanMadeNotice: string;
     submitVia: string;
+    submittedBy: string;
     faqEmpty: string;
     starterEmpty: string;
   };
@@ -101,7 +103,8 @@ const dictionary: Record<Locale, Messages> = {
       fanDisclaimer: "声明",
       fanStarter: "入坑指南",
       fanFaq: "常见问题",
-      fanContribute: "Contribute",
+      fanContribute: "投稿方式",
+      fanSubmissions: "粉丝投稿",
       bioSources: "资料来源与声明"
     },
     countdown: {
@@ -135,7 +138,8 @@ const dictionary: Record<Locale, Messages> = {
       lastUpdated: "最后更新",
       source: "来源",
       fanMadeNotice: "粉丝站声明",
-      submitVia: "一起开发，欢迎访问站点 GitHub 主页：",
+      submitVia: "请发送投稿文案、图片和希望展示的昵称至邮箱，审核整理后发布。",
+      submittedBy: "投稿：",
       faqEmpty: "暂无常见问题条目",
       starterEmpty: "暂无入坑推荐内容"
     }
@@ -171,6 +175,7 @@ const dictionary: Record<Locale, Messages> = {
       fanStarter: "Getting Started",
       fanFaq: "FAQ",
       fanContribute: "Contribute",
+      fanSubmissions: "Fan Submissions",
       bioSources: "Sources & Notice"
     },
     countdown: {
@@ -204,7 +209,8 @@ const dictionary: Record<Locale, Messages> = {
       lastUpdated: "Last Updated",
       source: "Source",
       fanMadeNotice: "Fan Site Notice",
-      submitVia: "Contribute together on the site GitHub homepage:",
+      submitVia: "Email your text, images, and preferred display name. Submissions will be reviewed and prepared before publication.",
+      submittedBy: "Submitted by: ",
       faqEmpty: "No FAQ items yet",
       starterEmpty: "No starter recommendations available"
     }
@@ -240,6 +246,7 @@ const dictionary: Record<Locale, Messages> = {
       fanStarter: "入門ガイド",
       fanFaq: "よくある質問",
       fanContribute: "投稿・協力",
+      fanSubmissions: "ファン投稿",
       bioSources: "出典と注記"
     },
     countdown: {
@@ -273,7 +280,8 @@ const dictionary: Record<Locale, Messages> = {
       lastUpdated: "最終更新",
       source: "出典",
       fanMadeNotice: "ファンサイト注記",
-      submitVia: "一緒に開発しましょう。サイトのGitHubページはこちら：",
+      submitVia: "投稿本文・画像・掲載希望のニックネームをメールでお送りください。内容を確認・整理したうえで掲載します。",
+      submittedBy: "投稿者：",
       faqEmpty: "FAQ項目はまだありません",
       starterEmpty: "入門向けのおすすめはまだありません"
     }

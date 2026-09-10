@@ -7,6 +7,7 @@ import type {
   FanHub,
   FanInfo,
   FanStarterVideo,
+  FanSubmission,
   HomeBanner,
   NewsItem,
   Song
@@ -140,6 +141,33 @@ export async function getFanHub(): Promise<FanHub> {
   const fanHub = await readJson<FanHub>("fan_hub.json");
   validateFanHub(fanHub);
   return fanHub;
+}
+
+export async function getFanSubmissions(): Promise<FanSubmission[]> {
+  const submissions = await readJson<FanSubmission[]>("fan_submissions.json");
+  assert(Array.isArray(submissions), "fan_submissions.json must be an array");
+  const ids = new Set<string>();
+  const floors = new Set<number>();
+  submissions.forEach((item) => {
+    assert(item && typeof item === "object", "fan submission must be an object");
+    assert(typeof item.id === "string" && item.id.trim(), "fan submission id is required");
+    assert(!ids.has(item.id), `fan submission id ${item.id} must be unique`);
+    assert(Number.isInteger(item.floor) && item.floor > 0, `fan submission ${item.id} must have a positive integer floor`);
+    assert(!floors.has(item.floor), `fan submission floor ${item.floor} must be unique`);
+    ids.add(item.id);
+    floors.add(item.floor);
+    assert(typeof item.author === "string" && item.author.trim(), `fan submission ${item.id} author is required`);
+    assert(typeof item.content === "string" && item.content.trim(), `fan submission ${item.id} content is required`);
+    assert(Array.isArray(item.images) && item.images.length > 0, `fan submission ${item.id} images are required`);
+    item.images.forEach((image) => {
+      assert(image && typeof image === "object", `fan submission ${item.id} image must be an object`);
+      assert(typeof image.src === "string" && /^\/assets\/fans_upload\/[a-z0-9-]+\.webp$/.test(image.src), `fan submission ${item.id} image must use a local WebP`);
+      assert(typeof image.alt?.zh === "string" && image.alt.zh.trim(), `fan submission ${item.id} image alt is required`);
+      assert(Number.isInteger(image.width) && image.width > 0, `fan submission ${item.id} image width must be positive`);
+      assert(Number.isInteger(image.height) && image.height > 0, `fan submission ${item.id} image height must be positive`);
+    });
+  });
+  return submissions.sort((a, b) => b.floor - a.floor);
 }
 
 export async function getBioCredibility(): Promise<BioCredibility> {

@@ -505,6 +505,74 @@ a {
   gap: 0.9rem;
 }
 
+.fan-submissions {
+  display: grid;
+  gap: 0.9rem;
+  min-width: 0;
+  padding: 1rem 0;
+}
+
+.fan-submissions > h2 {
+  margin: 0 0 0.25rem;
+}
+
+.fan-submission-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--muted);
+}
+
+.fan-submission-floor {
+  color: var(--brand);
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+}
+
+.fan-submission-content {
+  font-size: 1.2rem;
+  font-weight: 600;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.fan-submission-images {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+
+.fan-submission-images a {
+  display: block;
+  border-radius: 12px;
+}
+
+.fan-submission-images img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.fan-submission-images a:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 4px;
+}
+
+.fan-contribute-link {
+  justify-self: start;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+  .fan-submission-images {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .fan-hub-card {
   padding: 1.15rem 1.2rem;
   display: grid;
