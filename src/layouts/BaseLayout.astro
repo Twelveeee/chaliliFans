@@ -1,16 +1,35 @@
 ---
 import "@/styles/global.css";
-import { mapHtmlLang } from "@/lib/i18n";
+import { isLocale, locales, mapHtmlLang } from "@/lib/i18n";
 import type { Locale } from "@/types/content";
 
 interface Props {
   title: string;
   description: string;
   locale: Locale;
+  noindex?: boolean;
+  image?: string;
 }
 
-const { title, description, locale } = Astro.props;
+const { title, description, locale, noindex = false, image } = Astro.props;
 const htmlLang = mapHtmlLang(locale);
+if (!Astro.site) throw new Error("The site URL must be configured for SEO metadata.");
+const site = Astro.site;
+const pageTitle = title.includes("Chalili Fans") ? title : `${title} | Chalili Fans`;
+const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const canonical = new URL(pathname === "/" ? "/" : `${pathname}/`, site).href;
+const [, routeLocale, ...segments] = pathname.split("/");
+const localized = isLocale(routeLocale);
+const suffix = localized && segments.length ? `${segments.join("/")}/` : "";
+const alternates = !noindex && localized
+  ? [
+      ...locales.map((language) => ({
+        lang: mapHtmlLang(language),
+        href: new URL(`/${language}/${suffix}`, site).href
+      })),
+      { lang: "x-default", href: new URL(`/zh/${suffix}`, site).href }
+    ]
+  : [];
 ---
 
 <!doctype html>
@@ -18,8 +37,24 @@ const htmlLang = mapHtmlLang(locale);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
+    {alternates.map((alternate) => <link rel="alternate" hreflang={alternate.lang} href={alternate.href} />)}
+    <link rel="sitemap" href={new URL("/sitemap-index.xml", site).href} />
+    {
+      !noindex && (
+        <>
+          <meta property="og:type" content="website" />
+          <meta property="og:site_name" content="Chalili Fans" />
+          <meta property="og:title" content={pageTitle} />
+          <meta property="og:description" content={description} />
+          <meta property="og:url" content={canonical} />
+          <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+          {image && <meta property="og:image" content={new URL(image, site).href} />}
+        </>
+      )
+    }
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />

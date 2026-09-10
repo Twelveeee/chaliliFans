@@ -23,7 +23,7 @@ const messages = getMessages(locale);
 const bioCredibility = await getBioCredibility();
 ---
 
-<BaseLayout title={`${messages.nav.bio} | ${messages.siteTitle}`} description={messages.siteSubtitle} locale={locale}>
+<BaseLayout title={`${messages.nav.bio} | ${messages.siteTitle}`} description={messages.seoDescriptions.bio} locale={locale}>
   <Header locale={locale} pathSuffix="/bio" messages={messages} />
   <main class="page-main">
     <PageHero title={messages.sections.bio} subtitle={messages.siteSubtitle} />

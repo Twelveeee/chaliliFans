@@ -24,7 +24,7 @@ const news = await getNews();
 const sortedNews = [...news].sort((a, b) => b.date.localeCompare(a.date));
 ---
 
-<BaseLayout title={`${messages.nav.news} | ${messages.siteTitle}`} description={messages.siteSubtitle} locale={locale}>
+<BaseLayout title={`${messages.nav.news} | ${messages.siteTitle}`} description={messages.seoDescriptions.news} locale={locale}>
   <Header locale={locale} pathSuffix="/news" messages={messages} />
   <main class="page-main">
     <PageHero title={messages.sections.news} subtitle={messages.siteSubtitle} />

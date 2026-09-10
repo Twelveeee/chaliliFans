@@ -24,7 +24,7 @@ const messages = getMessages(locale);
 const songs = await getSongs();
 ---
 
-<BaseLayout title={`${messages.nav.music} | ${messages.siteTitle}`} description={messages.siteSubtitle} locale={locale}>
+<BaseLayout title={`${messages.nav.music} | ${messages.siteTitle}`} description={messages.seoDescriptions.music} locale={locale}>
   <Header locale={locale} pathSuffix="/music" messages={messages} />
   <main class="page-main">
     <PageHero title={messages.sections.music} subtitle={messages.siteSubtitle} />

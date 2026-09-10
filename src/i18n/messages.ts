@@ -3,6 +3,7 @@ import type { Locale } from "@/types/content";
 export interface Messages {
   siteTitle: string;
   siteSubtitle: string;
+  seoDescriptions: Record<"home" | "bio" | "music" | "news" | "video" | "fan", string>;
   nav: {
     home: string;
     bio: string;
@@ -76,6 +77,14 @@ const dictionary: Record<Locale, Messages> = {
   zh: {
     siteTitle: "茶理理 Chalili",
     siteSubtitle: "声音、故事与热爱在这里汇合",
+    seoDescriptions: {
+      home: "Chalili Fans 茶理理粉丝站，收录茶理理歌曲、作品信息、最新动态和粉丝投稿，发现她的音乐与故事。",
+      bio: "了解茶理理 Chalili 的个人简介、音乐经历与代表作品，查阅粉丝整理的资料和来源。",
+      music: "浏览茶理理 Chalili 的歌曲列表、发布时间和作品介绍，查看歌曲详情及 Bilibili、网易云等平台链接。",
+      news: "查看茶理理 Chalili 的新歌发布与作品动态，阅读相关介绍并访问原始发布链接。",
+      video: "从 Chalili Fans 前往茶理理的 Bilibili 主页，观看音乐作品与视频投稿。",
+      fan: "茶理理粉丝交流区：查看粉丝投稿与收藏分享、QQ群信息，以及向 Chalili Fans 投稿的邮箱和常见问题。"
+    },
     nav: {
       home: "首页",
       bio: "简介",
@@ -147,6 +156,14 @@ const dictionary: Record<Locale, Messages> = {
   en: {
     siteTitle: "Chalili",
     siteSubtitle: "Where voice, stories, and fandom come together",
+    seoDescriptions: {
+      home: "Chalili Fans is a fan-made guide to Chalili’s songs, releases, latest updates, and fan submissions. Explore her music and stories.",
+      bio: "Learn about Chalili’s background, music journey, and notable works through fan-curated information and sources.",
+      music: "Explore Chalili’s songs, release dates, and descriptions, with details and listening links to Bilibili, NetEase Music, and more.",
+      news: "Catch up on Chalili’s song releases and music updates, with descriptions and links to the original announcements.",
+      video: "Visit Chalili’s Bilibili profile from Chalili Fans to watch her music and video uploads.",
+      fan: "Explore Chalili fan submissions and collections, find the QQ fan group, and learn how to contribute to Chalili Fans by email."
+    },
     nav: {
       home: "Home",
       bio: "Bio",
@@ -218,6 +235,14 @@ const dictionary: Record<Locale, Messages> = {
   ja: {
     siteTitle: "茶理理 Chalili",
     siteSubtitle: "声と物語、そしてファンがつながる場所",
+    seoDescriptions: {
+      home: "Chalili Fans は茶理理の楽曲・作品情報・最新ニュース・ファン投稿を紹介するファンサイトです。音楽と物語をお楽しみください。",
+      bio: "茶理理 Chalili のプロフィール、音楽活動、代表作品を、ファンが整理した資料と出典から紹介します。",
+      music: "茶理理 Chalili の楽曲一覧、公開日、作品紹介を掲載。詳細ページから Bilibili や NetEase Music などの配信先へアクセスできます。",
+      news: "茶理理 Chalili の新曲公開や音楽活動の最新情報を、作品紹介や公開元へのリンクとともに掲載しています。",
+      video: "Chalili Fans から茶理理の Bilibili プロフィールへ。音楽作品や投稿動画をご覧いただけます。",
+      fan: "茶理理のファン投稿やコレクション、QQファングループ情報を紹介。メールでの投稿方法とよくある質問も掲載しています。"
+    },
     nav: {
       home: "ホーム",
       bio: "プロフィール",

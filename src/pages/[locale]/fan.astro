@@ -23,7 +23,7 @@ const messages = getMessages(locale);
 const [fanInfo, fanHub, submissions] = await Promise.all([getFanInfo(), getFanHub(), getFanSubmissions()]);
 ---
 
-<BaseLayout title={`${messages.nav.fan} | ${messages.siteTitle}`} description={messages.siteSubtitle} locale={locale}>
+<BaseLayout title={`${messages.nav.fan} | ${messages.siteTitle}`} description={messages.seoDescriptions.fan} locale={locale}>
   <Header locale={locale} pathSuffix="/fan" messages={messages} />
   <main class="page-main">
     <PageHero title={messages.sections.fan} subtitle={messages.siteSubtitle} />

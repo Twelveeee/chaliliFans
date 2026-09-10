@@ -21,7 +21,7 @@ const locale: Locale = localeParam;
 const messages = getMessages(locale);
 ---
 
-<BaseLayout title={`${messages.nav.video} | ${messages.siteTitle}`} description={messages.siteSubtitle} locale={locale}>
+<BaseLayout title={`${messages.nav.video} | ${messages.siteTitle}`} description={messages.seoDescriptions.video} locale={locale}>
   <Header locale={locale} pathSuffix="/video" messages={messages} />
   <main class="page-main">
     <PageHero title={messages.sections.video} subtitle={messages.siteSubtitle} />

@@ -34,6 +34,7 @@ const producer = song.producer.trim();
   title={`${getText(song.title, locale)} | ${messages.siteTitle}`}
   description={songDescription || getText(song.title, locale)}
   locale={locale}
+  image={song.cover}
 >
   <Header locale={locale} pathSuffix={`/music/${song.id}`} messages={messages} />
   <main class="page-main shell">

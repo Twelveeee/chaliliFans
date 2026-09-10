@@ -29,7 +29,7 @@ const sortedNews = [...news].sort((a, b) => b.date.localeCompare(a.date));
 const activeBanners = [...banners].filter((item) => item.active).sort((a, b) => a.order - b.order);
 ---
 
-<BaseLayout title={`${messages.siteTitle} | Chalili Fans`} description={messages.siteSubtitle} locale={locale}>
+<BaseLayout title={`${messages.siteTitle} | Chalili Fans`} description={messages.seoDescriptions.home} locale={locale}>
   <Header locale={locale} pathSuffix="" messages={messages} />
   <main class="page-main">
     <HomeCarousel locale={locale} banners={activeBanners} messages={messages} />
