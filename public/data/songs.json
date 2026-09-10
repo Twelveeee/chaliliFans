@@ -1,6 +1,29 @@
 [
   {
     "title": {
+      "zh": "夏日奇迹"
+    },
+    "description": {
+      "zh": "C three dance party 主题曲"
+    },
+    "artist": "茶理理",
+    "lyricist": "Loky",
+    "composer": "Loky",
+    "arranger": "可乐",
+    "producer": "",
+    "cover": "/assets/covers/夏日奇迹.jpg",
+    "releaseDate": "2026-09-05 13:30:00",
+    "platformLinks": {
+      "bilibili": "https://www.bilibili.com/video/BV1y6tz6xEaR"
+    },
+    "bilibiliDesc": {
+      "zh": "简介：给 C three dance party编的主题曲！！\n《夏日奇迹》\n作词/作曲：Loky\n编曲/混音：可乐\n演唱：@茶理理理子\n编舞：@千本露露\n企划：@C3_dance\n策划：@一只老皮皮R"
+    },
+    "neteaseSongId": null,
+    "id": "song-106"
+  },
+  {
+    "title": {
       "zh": "Floral Punch！"
     },
     "description": {
